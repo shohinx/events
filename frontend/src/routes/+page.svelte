@@ -1,7 +1,59 @@
 <script lang="ts">
 	import { Education, Experience, Introduction, Projects, Skills, Tools } from '$lib';
 
-	let portfolioContent = $state({
+	type SocialLinks = {
+		x: string;
+		email: string;
+		linkedin: string;
+		telegram: string;
+		steam: string;
+		github: string;
+	};
+
+	type IntroductionData = {
+		name: string;
+		occupation: string;
+		description: string;
+		avatar: string;
+		socials: SocialLinks;
+	};
+
+	type ExperienceItem = {
+		company: string;
+		role: string;
+		duration: string;
+		image: string;
+	};
+
+	type EducationData = {
+		image: string;
+		school: string;
+		degree: string;
+		graduationYear: string;
+	};
+
+	type BadgeItem = {
+		icon: string;
+		text: string;
+	};
+
+	type ProjectItem = {
+		name: string;
+		technology: string;
+		description: string;
+		link: string;
+	};
+
+	type PortfolioContent = {
+		introduction: IntroductionData;
+		experiences: ExperienceItem[];
+		education: EducationData;
+		skills: BadgeItem[];
+		tools: BadgeItem[];
+		projects: ProjectItem[];
+	};
+
+	const portfolioContent = {
 		introduction: {
 			name: 'Shohin Abdulkhamidov',
 			occupation: 'Aspiring Full-Stack Software Engineer',
@@ -44,7 +96,7 @@
 			{
 				icon: `<svg class="h-4 w-4 text-primary" xmlns="http://www.w3.org/2000/svg" height="78" viewBox="0 0 207 78" width="207"><g fill="#fff" fill-rule="evenodd"><path d="m16.2 24.1c-.4 0-.5-.2-.3-.5l2.1-2.7c.2-.3.7-.5 1.1-.5h35.7c.4 0 .5.3.3.6l-1.7 2.6c-.2.3-.7.6-1 .6z"/><path d="m1.1 33.3c-.4 0-.5-.2-.3-.5l2.1-2.7c.2-.3.7-.5 1.1-.5h45.6c.4 0 .6.3.5.6l-.8 2.4c-.1.4-.5.6-.9.6z"/><path d="m25.3 42.5c-.4 0-.5-.3-.3-.6l1.4-2.5c.2-.3.6-.6 1-.6h20c.4 0 .6.3.6.7l-.2 2.4c0 .4-.4.7-.7.7z"/><g transform="translate(55)"><path d="m74.1 22.3c-6.3 1.6-10.6 2.8-16.8 4.4-1.5.4-1.6.5-2.9-1-1.5-1.7-2.6-2.8-4.7-3.8-6.3-3.1-12.4-2.2-18.1 1.5-6.8 4.4-10.3 10.9-10.2 19 .1 8 5.6 14.6 13.5 15.7 6.8.9 12.5-1.5 17-6.6.9-1.1 1.7-2.3 2.7-3.7-3.6 0-8.1 0-19.3 0-2.1 0-2.6-1.3-1.9-3 1.3-3.1 3.7-8.3 5.1-10.9.3-.6 1-1.6 2.5-1.6h36.4c-.2 2.7-.2 5.4-.6 8.1-1.1 7.2-3.8 13.8-8.2 19.6-7.2 9.5-16.6 15.4-28.5 17-9.8 1.3-18.9-.6-26.9-6.6-7.4-5.6-11.6-13-12.7-22.2-1.3-10.9 1.9-20.7 8.5-29.3 7.1-9.3 16.5-15.2 28-17.3 9.4-1.7 18.4-.6 26.5 4.9 5.3 3.5 9.1 8.3 11.6 14.1.6.9.2 1.4-1 1.7z"/><path d="m107.2 77.6c-9.1-.2-17.4-2.8-24.4-8.8-5.9-5.1-9.6-11.6-10.8-19.3-1.8-11.3 1.3-21.3 8.1-30.2 7.3-9.6 16.1-14.6 28-16.7 10.2-1.8 19.8-.8 28.5 5.1 7.9 5.4 12.8 12.7 14.1 22.3 1.7 13.5-2.2 24.5-11.5 33.9-6.6 6.7-14.7 10.9-24 12.8-2.7.5-5.4.6-8 .9zm23.8-40.4c-.1-1.3-.1-2.3-.3-3.3-1.8-9.9-10.9-15.5-20.4-13.3-9.3 2.1-15.3 8-17.5 17.4-1.8 7.8 2 15.7 9.2 18.9 5.5 2.4 11 2.1 16.3-.6 7.9-4.1 12.2-10.5 12.7-19.1z" fill-rule="nonzero"/></g></g></svg>`,
 				text: 'Golang'
-			},	
+			},
 			{
 				icon: `<svg class="h-4 w-4 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 7.5A2.86 2.86 0 0 1 22 10.36v3.78A2.86 2.86 0 0 1 19.14 17H12c0 .39.32.96.71.96H17v1.68a2.86 2.86 0 0 1-2.86 2.86H9.86A2.86 2.86 0 0 1 7 19.64v-3.75a2.85 2.85 0 0 1 2.86-2.85h5.25a2.85 2.85 0 0 0 2.85-2.86V7.5zm-4.28 11.79c-.4 0-.72.3-.72.89s.32.71.72.71a.71.71 0 0 0 .71-.71c0-.59-.32-.89-.71-.89m-10-1.79A2.86 2.86 0 0 1 2 14.64v-3.78A2.86 2.86 0 0 1 4.86 8H12c0-.39-.32-.96-.71-.96H7V5.36A2.86 2.86 0 0 1 9.86 2.5h4.28A2.86 2.86 0 0 1 17 5.36v3.75a2.85 2.85 0 0 1-2.86 2.85H8.89a2.85 2.85 0 0 0-2.85 2.86v2.68zM9.14 5.71c.4 0 .72-.3.72-.89s-.32-.71-.72-.71c-.39 0-.71.12-.71.71s.32.89.71.89"/></svg>`,
 				text: 'Python'
@@ -67,10 +119,10 @@
 			},
 
 			{
-				icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-database"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /><path d="M4 6v6a8 3 0 0 0 16 0v-6" /><path d="M4 12v6a8 3 0 0 0 16 0v-6" /></svg>`,
+				icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary icon icon-tabler icons-tabler-outline icon-tabler-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /><path d="M4 6v6a8 3 0 0 0 16 0v-6" /><path d="M4 12v6a8 3 0 0 0 16 0v-6" /></svg>`,
 				text: 'SQL'
 			},
-			{ 		
+			{
 				icon: `<svg  class="h-4 w-4 text-primary" fill="currentColor"  xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 256"><path d="M128 0C57.33 0 0 57.33 0 128s57.33 128 128 128 128-57.33 128-128S198.67 0 128 0Zm-6.67 230.605v-80.288H76.699l64.128-124.922v80.288h42.966L121.33 230.605Z" /></svg>`,
 				text: 'FastAPI'
 			},
@@ -123,7 +175,7 @@
 			{
 				icon: `<svg class="h-4 w-4 text-primary" fill="none" viewBox="0 0 54 33"><g clip-path="url(#tailwindcss__a)"><path fill="currentColor" fill-rule="evenodd" d="M27 0c-7.2 0-11.7 3.6-13.5 10.8 2.7-3.6 5.85-4.95 9.45-4.05 2.054.513 3.522 2.004 5.147 3.653C30.744 13.09 33.808 16.2 40.5 16.2c7.2 0 11.7-3.6 13.5-10.8-2.7 3.6-5.85 4.95-9.45 4.05-2.054-.513-3.522-2.004-5.147-3.653C36.756 3.11 33.692 0 27 0zM13.5 16.2C6.3 16.2 1.8 19.8 0 27c2.7-3.6 5.85-4.95 9.45-4.05 2.054.514 3.522 2.004 5.147 3.653C17.244 29.29 20.308 32.4 27 32.4c7.2 0 11.7-3.6 13.5-10.8-2.7 3.6-5.85 4.95-9.45 4.05-2.054-.513-3.522-2.004-5.147-3.653C23.256 19.31 20.192 16.2 13.5 16.2z" clip-rule="evenodd"/></g><defs><clipPath id="tailwindcss__a"><path fill="#fff" d="M0 0h54v32.4H0z"/></clipPath></defs></svg>`,
 				text: 'Tailwind CSS'
-			},
+			}
 			// {
 			// 	icon: `<svg class="h-4 w-4 text-primary"  viewBox="0 0 512 214"><path fill="currentColor" d="M512 110.08c0-36.409-17.636-65.138-51.342-65.138c-33.85 0-54.33 28.73-54.33 64.854c0 42.808 24.179 64.426 58.88 64.426c16.925 0 29.725-3.84 39.396-9.244v-28.445c-9.67 4.836-20.764 7.823-34.844 7.823c-13.796 0-26.027-4.836-27.591-21.618h69.547c0-1.85.284-9.245.284-12.658m-70.258-13.511c0-16.071 9.814-22.756 18.774-22.756c8.675 0 17.92 6.685 17.92 22.756zm-90.31-51.627c-13.939 0-22.899 6.542-27.876 11.094l-1.85-8.818h-31.288v165.83l35.555-7.537l.143-40.249c5.12 3.698 12.657 8.96 25.173 8.96c25.458 0 48.64-20.48 48.64-65.564c-.142-41.245-23.609-63.716-48.498-63.716m-8.534 97.991c-8.391 0-13.37-2.986-16.782-6.684l-.143-52.765c3.698-4.124 8.818-6.968 16.925-6.968c12.942 0 21.902 14.506 21.902 33.137c0 19.058-8.818 33.28-21.902 33.28M241.493 36.551l35.698-7.68V0l-35.698 7.538zm0 10.809h35.698v124.444h-35.698zm-38.257 10.524L200.96 47.36h-30.72v124.444h35.556V87.467c8.39-10.951 22.613-8.96 27.022-7.396V47.36c-4.551-1.707-21.191-4.836-29.582 10.524m-71.112-41.386l-34.702 7.395l-.142 113.92c0 21.05 15.787 36.551 36.836 36.551c11.662 0 20.195-2.133 24.888-4.693V140.8c-4.55 1.849-27.022 8.391-27.022-12.658V77.653h27.022V47.36h-27.022zM35.982 83.484c0-5.546 4.551-7.68 12.09-7.68c10.808 0 24.461 3.272 35.27 9.103V51.484c-11.804-4.693-23.466-6.542-35.27-6.542C19.2 44.942 0 60.018 0 85.192c0 39.252 54.044 32.995 54.044 49.92c0 6.541-5.688 8.675-13.653 8.675c-11.804 0-26.88-4.836-38.827-11.378v33.849c13.227 5.689 26.596 8.106 38.827 8.106c29.582 0 49.92-14.648 49.92-40.106c-.142-42.382-54.329-34.845-54.329-50.774"/></svg>`,
 			// 	text: 'Stripe'
@@ -156,7 +208,7 @@
 				name: 'FlexRent',
 				technology: 'Figma',
 				description: 'Design system',
-				link: 'https://www.figma.com/design/c6BSK1vEwPgJe8XVvR69z5/Flexrent?node-id=17-74063&t=fhZPAyUeFdrSb8gR-1https://www.figma.com/design/c6BSK1vEwPgJe8XVvR69z5/Flexrent?node-id=17-74063&t=fhZPAyUeFdrSb8gR-1'
+				link: 'https://www.figma.com/design/c6BSK1vEwPgJe8XVvR69z5/Flexrent?node-id=17-74063&t=fhZPAyUeFdrSb8gR-1'
 			},
 			{
 				name: 'Starbucks Enterprise',
@@ -171,11 +223,16 @@
 				link: 'https://github.com/shohinsan/jinuai'
 			}
 		]
-	});
+	} satisfies PortfolioContent;
 </script>
 
+<svelte:head>
+	<title>{portfolioContent.introduction.name} | Portfolio</title>
+	<meta name="description" content={portfolioContent.introduction.description} />
+</svelte:head>
+
 <div class="bg-background relative flex flex-col items-center justify-center overflow-x-hidden">
-	<div class="my-24 mb-[100px] flex w-full max-w-[680px] flex-col px-5 sm:mb-[200px] lg:px-0">
+	<div class="my-24 mb-25 flex w-full max-w-170 flex-col px-5 sm:mb-50 lg:px-0">
 		<Introduction data={portfolioContent.introduction} />
 		<Experience data={portfolioContent.experiences} />
 		<Education data={portfolioContent.education} />
@@ -191,6 +248,6 @@
 		<Projects data={portfolioContent.projects} />
 	</div>
 	<div
-		class="from-background to-background-secondary bg-background h-[200px] w-full bg-linear-to-b"
+		class="from-background to-background-secondary bg-background h-50 w-full bg-linear-to-b"
 	></div>
 </div>

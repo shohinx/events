@@ -1,14 +1,20 @@
 <script lang="ts">
-	let { data } = $props();
+	type BadgeItem = {
+		icon: string;
+		text: string;
+	};
+
+	let { data }: { data: BadgeItem[] } = $props();
 </script>
 
-<div id="skillsSection" class="flex flex-col justify-start w-full">
+<div id="skillsSection" class="flex w-full flex-col justify-start">
 	<div class="text-faint text-xs font-extrabold uppercase">Technical Skills</div>
-	<div class="flex flex-wrap mt-4 gap-1.5">
-		{#each data as skill}
+	<div class="mt-4 flex flex-wrap gap-1.5">
+		{#each data as skill (skill.text)}
 			<div
-				class="flex items-center justify-center py-1 px-1.5 text-tertiary font-medium text-xs space-x-[5px] bg-background-tertiary rounded-md border border-background-secondary"
+				class="text-tertiary bg-background-tertiary border-background-secondary flex items-center justify-center space-x-1.25 rounded-md border px-1.5 py-1 text-xs font-medium"
 			>
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -- Icons are trusted inline SVG strings from +page.svelte. -->
 				{@html skill.icon}
 				<div>{skill.text}</div>
 			</div>

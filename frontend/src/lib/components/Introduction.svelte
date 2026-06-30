@@ -1,5 +1,44 @@
 <script lang="ts">
-	let { data } = $props();
+	type UmamiTracker = {
+		track: (eventName: string, data?: Record<string, string>) => void | Promise<unknown>;
+	};
+
+	type UmamiWindow = Window & {
+		umami?: UmamiTracker;
+	};
+
+	type IntroductionData = {
+		name: string;
+		occupation: string;
+		description: string;
+		avatar: string;
+		socials: {
+			x: string;
+			linkedin: string;
+			telegram: string;
+			steam: string;
+			github: string;
+		};
+	};
+
+	let { data }: { data: IntroductionData } = $props();
+
+	function trackPersonalLink(link: string, url: string) {
+		try {
+			void (window as UmamiWindow).umami?.track(`Personal link: ${link}`, {
+				link,
+				description: `${link} personal link clicked: ${url}`,
+				url
+			});
+		} catch {
+			// Never let analytics block navigation.
+		}
+	}
+
+	function openPersonalLink(link: string, url: string) {
+		trackPersonalLink(link, url);
+		window.open(url, '_blank', 'noopener,noreferrer');
+	}
 </script>
 
 <!--
@@ -13,7 +52,7 @@
 
 <div class="flex w-full flex-col">
 	<div
-		class="mt-6 flex flex-col items-center space-y-2 sm:mt-2 sm:flex-row sm:space-x-5 sm:space-y-0"
+		class="mt-6 flex flex-col items-center space-y-2 sm:mt-2 sm:flex-row sm:space-y-0 sm:space-x-5"
 	>
 		<div class="flex w-full flex-col items-center sm:flex-row">
 			<div class="mb-2 shrink-0 rounded-full sm:mb-0">
@@ -36,7 +75,7 @@
 			<div class="flex items-center space-x-5 sm:space-x-3">
 				<button
 					aria-label="X Social Media link"
-					onclick={() => window.open(data.socials.x, '_blank')}
+					onclick={() => openPersonalLink('X', data.socials.x)}
 					class="cursor-pointer"
 				>
 					<svg
@@ -54,7 +93,7 @@
 				<!-- Steam icon with better styling -->
 				<button
 					aria-label="Steam link"
-					onclick={() => window.open(data.socials.steam, '_blank')}
+					onclick={() => openPersonalLink('Steam', data.socials.steam)}
 					class="cursor-pointer"
 				>
 					<svg
@@ -73,7 +112,7 @@
 				<!-- Telegram icon with better styling -->
 				<button
 					aria-label="Telegram link"
-					onclick={() => window.open(data.socials.telegram, '_blank')}
+					onclick={() => openPersonalLink('Telegram', data.socials.telegram)}
 					class="cursor-pointer"
 				>
 					<svg class="text-faint hover:text-secondary h-11 w-11 sm:h-6 sm:w-6" viewBox="0 0 24 24">
@@ -89,7 +128,7 @@
 			<div class="flex items-center justify-center space-x-5 sm:space-x-3">
 				<button
 					aria-label="GitHub link"
-					onclick={() => window.open(data.socials.github, '_blank')}
+					onclick={() => openPersonalLink('GitHub', data.socials.github)}
 					class="cursor-pointer"
 				>
 					<svg class="text-faint hover:text-secondary h-11 w-11 sm:h-6 sm:w-6" viewBox="0 0 24 24">
@@ -102,7 +141,7 @@
 				<div class="bg-faint/50 h-5 w-px sm:h-3.5"></div>
 				<button
 					aria-label="LinkedIn Social Media link"
-					onclick={() => window.open(data.socials.linkedin, '_blank')}
+					onclick={() => openPersonalLink('LinkedIn', data.socials.linkedin)}
 					class="cursor-pointer"
 				>
 					<svg

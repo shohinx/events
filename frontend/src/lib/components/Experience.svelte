@@ -1,41 +1,50 @@
 <script lang="ts">
-    let { data } = $props();
+	type ExperienceItem = {
+		company: string;
+		role: string;
+		duration: string;
+		image: string;
+	};
+
+	let { data }: { data: ExperienceItem[] } = $props();
 </script>
 
-<div id="experienceSection" class="flex flex-col justify-start w-full mt-12">
-    <div class="text-faint text-xs font-extrabold uppercase">Experience</div>
-    <div class="flex flex-col items-start justify-center mt-6">
-        {#each data as experience, index}
-            <div class="flex w-full">
-                <div class="flex flex-col items-center shrink-0">
-                    <img 
-                        src={experience.image} 
-                        alt="{experience.company} logo"
-                        class="h-12 w-12 rounded-full shrink-0"
-                    />
-                    {#if index !== data.length - 1}
-                        <div class="w-0.5 grow bg-background-tertiary"></div>
-                    {/if}
-                </div>
-                <div class="flex ml-3 flex-col grow pb-14">
-                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full min-h-12">
-                        <div class="flex flex-col justify-start items-start">
-                        <div class="text-primary text-lg sm:text-xl font-semibold">
-                            {experience.company}
-                        </div>
-                        <div class="text-faint text-sm">
-                            {experience.role}
-                        </div>
-                        </div>
-                        <div class="text-tertiary text-sm flex items-center mt-1 sm:mt-0">
-                        {#if experience.duration === "Present"}
-                            <div class="bg-green-600 w-1.5 border-green-700 animate-pulse h-1.5 rounded-full mr-2"></div>
-                        {/if}
-                        {experience.duration}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {/each}
-    </div>
+<div id="experienceSection" class="mt-12 flex w-full flex-col justify-start">
+	<div class="text-faint text-xs font-extrabold uppercase">Experience</div>
+	<div class="mt-6 flex flex-col items-start justify-center">
+		{#each data as experience, index (experience.company)}
+			<div class="flex w-full">
+				<div class="flex shrink-0 flex-col items-center">
+					<img
+						src={experience.image}
+						alt="{experience.company} logo"
+						class="h-12 w-12 shrink-0 rounded-full"
+					/>
+					{#if index !== data.length - 1}
+						<div class="bg-background-tertiary w-0.5 grow"></div>
+					{/if}
+				</div>
+				<div class="ml-3 flex grow flex-col pb-14">
+					<div class="flex min-h-12 w-full flex-col sm:flex-row sm:items-center sm:justify-between">
+						<div class="flex flex-col items-start justify-start">
+							<div class="text-primary text-lg font-semibold sm:text-xl">
+								{experience.company}
+							</div>
+							<div class="text-faint text-sm">
+								{experience.role}
+							</div>
+						</div>
+						<div class="text-tertiary mt-1 flex items-center text-sm sm:mt-0">
+							{#if experience.duration === 'Present'}
+								<div
+									class="mr-2 h-1.5 w-1.5 animate-pulse rounded-full border-green-700 bg-green-600"
+								></div>
+							{/if}
+							{experience.duration}
+						</div>
+					</div>
+				</div>
+			</div>
+		{/each}
+	</div>
 </div>
