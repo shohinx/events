@@ -17,8 +17,9 @@
 		"prepare": "svelte-kit sync",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"prettier": "node --experimental-strip-types ./node_modules/prettier/bin/prettier.cjs",
+		"format": "npm run prettier -- --write .",
+		"lint": "npm run prettier -- --check . && eslint ."
 	},
 	"devDependencies": {
 		"@eslint/compat": "^2.0.1",
@@ -32,6 +33,7 @@
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.14.0",
 		"globals": "^16.5.0",
+		"jiti": "2.7.0",
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.4.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",

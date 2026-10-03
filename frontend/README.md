@@ -19,6 +19,10 @@ npx sv create my-app
 Use Node.js 22.17 or newer. This project uses SvelteKit 3, Svelte 5, and TypeScript 6,
 with SvelteKit and Cloudflare adapter configuration in `vite.config.ts`.
 
+Formatting and lint rules live in `prettier.config.ts` and `eslint.config.ts`.
+Use `npm run format` and `npm run lint`; these commands enable Prettier's TypeScript
+config support on Node 22.17. ESLint loads its TypeScript config through `jiti`.
+
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
