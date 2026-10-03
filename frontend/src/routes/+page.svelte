@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Education, Experience, Introduction, Projects, Skills, Tools } from '$lib';
+	import { Education, Experience, Introduction, Projects, Skills, Tools } from '#lib';
 
 	type SocialLinks = {
 		x: string;

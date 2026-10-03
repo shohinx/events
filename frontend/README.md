@@ -16,6 +16,9 @@ npx sv create my-app
 
 ## Developing
 
+Use Node.js 22.17 or newer. This project uses SvelteKit 3, Svelte 5, and TypeScript 6,
+with SvelteKit and Cloudflare adapter configuration in `vite.config.ts`.
+
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
